@@ -12,8 +12,18 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var display: UILabel!
     
+	private var brain = CalculatorBrain()
+		
     var userIsTyping = false
     
+	override func viewDidLoad() {
+		super.viewDidLoad()
+		brain.addUnaryOperation(named: "vv") {
+			self.display.textColor = UIColor.green
+			sqrt($0)
+		}
+	}
+	
     @IBAction func touchDigit (_ sender : UIButton){
         let digit = sender.currentTitle!
         
@@ -34,8 +44,6 @@ class ViewController: UIViewController {
             display.text = String(newValue)
         }
     }
-    
-    private var brain = CalculatorBrain()
     
     @IBAction func performOperation(_ sender: UIButton) {
         
